@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thamin's Portfolio</title>
+    <style>
+        /* --- Universal Styles & Font --- */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+        :root {
+            --primary-color: #ff4136; /* Red Accent */
+            --background-color: #121212; /* Dark Background */
+            --card-color: #1e1e1e; /* Slightly Lighter Dark */
+            --text-color: #f4f4f4; /* Off-White Text */
+            --secondary-text-color: #aaaaaa; /* Gray for subtitles */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* This line makes the scrolling smooth! */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        /* --- Reusable Components --- */
+        .container {
+            max-width: 1100px;
+            margin: auto;
+            padding: 0 20px;
+            overflow: hidden;
+        }
+
+        h1, h2 {
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: var(--text-color);
+        }
+        
+        h1 {
+            font-size: 3rem;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid var(--primary-color);
+            display: inline-block;
+        }
+        
+        section {
+            padding: 60px 0;
+        }
+        
+        .section-title-container {
+             text-align: center;
+             margin-bottom: 40px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 25px;
+            background-color: var(--primary-color);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            font-weight: 600;
+        }
+
+        .btn:hover {
+            background-color: #e03024;
+        }
+
+        /* --- Header & Navigation --- */
+        header {
+            background: rgba(18, 18, 18, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        header nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        header nav ul li {
+            margin-left: 25px;
+        }
+
+        header nav ul li a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        header nav ul li a:hover {
+            color: var(--primary-color);
+        }
+
+        /* --- Hero/About Section --- */
+        #about {
+            padding-top: 120px; /* Offset for fixed header */
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .about-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 50px;
+            flex-wrap: wrap;
+        }
+
+        .profile-pic {
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid var(--primary-color);
+        }
+
+        .bio {
+            max-width: 600px;
+        }
+        
+        .bio h1 span {
+            color: var(--primary-color);
+        }
+        
+        .bio p.subtitle {
+            font-size: 1.2rem;
+            color: var(--secondary-text-color);
+            margin-bottom: 15px;
+        }
+
+        .bio p {
+            font-size: 1rem;
+            margin-bottom: 20px;
+        }
+
+        /* --- Skills Section --- */
+        #skills {
+            background-color: var(--card-color);
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 20px;
+            text-align: center;
+        }
+
+        .skill-item {
+            background: var(--background-color);
+            padding: 25px 15px;
+            border-radius: 10px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .skill-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(255, 65, 54, 0.2);
+        }
+
+        /* --- Projects Section --- */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+        }
+
+        .project-card {
+            background: var(--card-color);
+            border-radius: 10px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid #333;
+        }
+        
+        .project-card-content {
+            padding: 25px;
+        }
+
+        .project-card h3 {
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        .project-card p {
+            margin-bottom: 20px;
+            color: var(--secondary-text-color);
+        }
+
+        /* --- Contact Section --- */
+        #contact {
+            background-color: var(--card-color);
+            text-align: center;
+        }
+
+        #contact p {
+            max-width: 600px;
+            margin: 0 auto 30px;
+            font-size: 1.1rem;
+        }
+
+        .contact-info {
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+        
+        .contact-info a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+        
+        .contact-info a:hover {
+            text-decoration: underline;
+        }
+
+        /* --- Footer --- */
+        footer {
+            text-align: center;
+            padding: 20px 0;
+            background: var(--background-color);
+            border-top: 1px solid #333;
+        }
+
+        /* --- Responsive Design --- */
+        @media(max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .about-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            header nav {
+                display: none; /* Simple approach for mobile */
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <a href="#" class="logo">Jay</a>
+            <nav>
+                <ul>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#skills">Skills</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section id="about">
+        <div class="container">
+            <div class="about-content">
+                <img src="jay.jpg" alt="Jay's Profile Picture" class="profile-pic">
+                <div class="bio">
+                    <h1>Hi, I'm <span>Jay</span></h1>
+                    <p class="subtitle">Web Developer & College Student</p>
+                    <p>I am a passionate web developer and a dedicated student at Sridevi Arts and Science College. With a strong foundation in building modern web applications, I enjoy turning complex problems into beautiful and intuitive digital experiences. I'm actively seeking opportunities to apply my skills and grow as a developer.</p>
+                    <a href="#contact" class="btn">Contact Me</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills">
+        <div class="container">
+            <div class="section-title-container">
+                <h2>My Skills</h2>
+            </div>
+            <div class="skills-grid">
+                <div class="skill-item">HTML</div>
+                <div class="skill-item">CSS</div>
+                <div class="skill-item">Python</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects">
+        <div class="container">
+            <div class="section-title-container">
+                <h2>Projects</h2>
+            </div>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-card-content">
+                        <h3>Login Page</h3>
+                        <p>A secure and user-friendly login page built with a focus on responsive design and modern front-end practices. This project demonstrates my proficiency in core web technologies.</p>
+                        <a href="project.html" class="btn" target="_blank">View Project</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="container">
+            <div class="section-title-container">
+                <h2>Get In Touch</h2>
+            </div>
+            <p>I'm currently looking for new opportunities and my inbox is always open. Whether you have a question or just want to say hi, I'll get back to you!</p>
+            <div class="contact-info">
+                <p><strong>Phone:</strong> 7418755647</p>
+                <p><strong>Email:</strong> <a href="vjeyaprakash24903bscai@gmail.com">vjeyaprakash24903bscai@gmail.com</a></p>
+                <p><strong>Inta:</strong> <a href="https://www.instagram.com/mr_jai___7?igsh=MTVzbm5sNGN5ZzR2eQ==">Jay_Insta</a></p>
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Thamin. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>

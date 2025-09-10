@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bus Ticket Booking</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f6f9;
+      margin: 0;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+      color: #1877f2;
+    }
+    .container {
+      max-width: 500px;
+      background: #fff;
+      margin: 20px auto;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    label {
+      display: block;
+      margin: 10px 0 5px;
+      font-weight: bold;
+    }
+    input, select {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+    button {
+      width: 100%;
+      padding: 12px;
+      background: #1877f2;
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #0f5dc0;
+    }
+    .ticket {
+      margin-top: 20px;
+      padding: 15px;
+      background: #e8f0fe;
+      border-radius: 8px;
+      border: 1px solid #bcd4ff;
+    }
+  </style>
+</head>
+<body>
+  <h1>🚌 Bus Ticket Booking</h1>
+  <div class="container">
+    <label for="from">From</label>
+    <input type="text" id="from" placeholder="Enter starting city">
+
+    <label for="to">To</label>
+    <input type="text" id="to" placeholder="Enter destination city">
+
+    <label for="date">Date</label>
+    <input type="date" id="date">
+
+    <label for="seats">Number of Seats</label>
+    <input type="number" id="seats" min="1" value="1">
+
+    <label for="bus">Select Bus</label>
+    <select id="bus">
+      <option value="500">AC Sleeper - ₹500</option>
+      <option value="300">Non-AC Seater - ₹300</option>
+      <option value="700">Volvo Luxury - ₹700</option>
+    </select>
+
+    <button onclick="bookTicket()">Book Ticket</button>
+
+    <div id="ticket" class="ticket" style="display:none;"></div>
+  </div>
+
+  <script>
+    function bookTicket() {
+      let from = document.getElementById("from").value;
+      let to = document.getElementById("to").value;
+      let date = document.getElementById("date").value;
+      let seats = document.getElementById("seats").value;
+      let bus = document.getElementById("bus");
+      let price = bus.value;
+      let busType = bus.options[bus.selectedIndex].text;
+
+      if(from === "" || to === "" || date === "") {
+        alert("Please fill all details!");
+        return;
+      }
+
+      let total = seats * price;
+
+      document.getElementById("ticket").style.display = "block";
+      document.getElementById("ticket").innerHTML = `
+        <h3>🎟️ Ticket Confirmed!</h3>
+        <p><strong>From:</strong> ${from}</p>
+        <p><strong>To:</strong> ${to}</p>
+        <p><strong>Date:</strong> ${date}</p>
+        <p><strong>Bus:</strong> ${busType}</p>
+        <p><strong>Seats:</strong> ${seats}</p>
+        <p><strong>Total Price:</strong> ₹${total}</p>
+      `;
+    }
+  </script>
+</body>
+</html>
